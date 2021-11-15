@@ -288,6 +288,8 @@ def init_widgets_list():
                 background = colors[1],
                 borderwidth = 8,
                 highlight_method = "text",
+                urgent_alert_method = "text",
+                urgent_text = colors[3],
                 this_current_screen_border = colors[6],
                 active = colors[4],
                 inactive = colors[9]
@@ -381,7 +383,7 @@ def assign_app_group(client):
     d[group_names[1][0]] = ['Navigator', 'brave-browser', 'Vivaldi-stable']
     d[group_names[2][0]] = ['pcmanfm', 'thunar', 'dolphin']
     d[group_names[3][0]] = ['discord', 'telegram-desktop']
-    d[group_names[4][0]] = ['code', 'geany', "VSCodium"]
+    d[group_names[4][0]] = ['code', 'geany', "vscodium"]
     d[group_names[5][0]] = ['vlc', 'obs', 'mpv', 'mplayer', 'lxmusic', 'gimp']
     d[group_names[6][0]] = ['spotify']
     d[group_names[7][0]] = ['lxappearance', 'gpartedbin', 'lxtask', 'lxrandr', 'arandr', 'pavucontrol', 'xfce4-settings-manager']
