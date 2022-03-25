@@ -1,18 +1,25 @@
 ##Cmatrix thing
 alias matrix='cmatrix -s -C cyan'
 
-#iso and version used to install ArcoLinux
-alias iso="cat /etc/dev-rel | awk -F '=' '/ISO/ {print $2}'"
+# Replace vim with nvim
+alias vim='nvim'
 
-#systeminfo
-alias probe="sudo -E hw-probe -all -upload"
+# Replace htop with btop
+alias htop='btop'
+
+# Replace spotify with adblock
+alias spotify='env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify %U'
 
 # Replace ls with exa
-alias ls='exa -al --color=always --group-directories-first --icons' # preferred listing
-alias la='exa -a --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first --icons'  # long format
-alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
-alias l='exa -lah --color=always --group-directories-first --icons' # tree listing
+alias ls='lsd --group-dirs=first' # preferred listing
+alias la='lsd -a --group-dirs=first'  # all files and dirs
+alias ll='lsd -lh --group-dirs=first'  # long format
+alias lla='lsd -lha --group-dirs=first' # tree listing
+alias l='lsd --group-dirs=first'
+
+#Replace cat with bat
+alias cat='bat --theme Nord'
+alias catnl='bat --theme Nord --paging=never'
 
 #pacman unlock
 alias unlock="sudo rm /var/lib/pacman/db.lck"
@@ -30,23 +37,17 @@ alias df='df -h'
 alias userlist="cut -d: -f1 /etc/passwd"
 
 #Pacman for software managment
-alias search='sudo pacman -Qs'
-alias remove='sudo pacman -R'
-alias install='sudo pacman -S'
-alias linstall='sudo pacman -U '
-alias update='sudo pacman -Syyu'
-alias clrcache='sudo pacman -Scc'
-alias updb='paru && sudo pacman -Sy'
 alias orphans='sudo pacman -Rns $(pacman -Qtdq)'
+alias pacinstalled='grep "\(upgraded\|installed\) $pkg" /var/log/pacman.log'
 
-#Snap Update
-alias sup='sudo snap refresh'
+#rsync backup
+alias backup='sudo rsync -arAXv --delete --timeout=300 --exclude-from="/home/pr0x/.rsync/exclude" / pr0x@nasty:/volume1/Backup/manual'
+alias backupdotfiles='rsync -arAXv --delete --timeout=300 --files-from="/home/pr0x/.rsync/dotfiles" / pr0x@nasty:/volume1/Backup/dotfiles'
 
 #grub update
 alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 #get fastest mirrors in your neighborhood
-alias ram='rate-mirrors --allow-root arch | sudo tee /etc/pacman.d/mirrorlist'
 alias reft='sudo systemctl enable reflector.service reflector.timer && sudo systemctl start reflector.service reflector.timer'
 
 #mounting the folder Public for exchange between host and guest on virtualbox
@@ -65,6 +66,7 @@ alias hw="hwinfo --short"
 
 #youtube-dl
 alias ytv-best='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio" --merge-output-format mp4 '
+alias ytv-audio='yt-dlp -x --audio-format mp3 '
 
 #GiT  command
 alias gc='git clone '
@@ -88,23 +90,6 @@ alias mkpkg='sudo vim /etc/makepkg.conf'
 alias ngrub='sudo vim /etc/default/grub'
 alias smbconf='sudo vim /etc/samba/smb.conf'
 alias nmirrorlist='sudo vim /etc/pacman.d/mirrorlist'
-
-#cd/ aliases
-alias home='cd ~'
-alias etc='cd /etc/'
-alias music='cd ~/Music'
-alias vids='cd ~/Videos'
-alias conf='cd ~/.config'
-alias desk='cd ~/Desktop'
-alias pics='cd ~/Pictures'
-alias dldz='cd ~/Downloads'
-alias docs='cd ~/Documents'
-alias sapps='cd /usr/share/applications'
-alias lapps='cd ~/.local/share/applications'
-
-#switch between lightdm and sddm
-alias tolightdm="sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings --noconfirm --needed ; sudo systemctl enable lightdm.service -f ; echo 'Lightm is active - reboot now'"
-alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable sddm.service -f ; echo 'Sddm is active - reboot now'"
 
 #Recent Installed Packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
@@ -140,3 +125,4 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
