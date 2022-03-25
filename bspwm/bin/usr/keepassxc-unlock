@@ -1,0 +1,6 @@
+#!/bin/bash
+# Get password using secret-tool and unlock keepassxc
+tmp_passwd=$(secret-tool lookup keepass IL)
+database='/home/pr0x/.config/keepassxc/IL.kdbx'
+dbus-send --print-reply --dest=org.keepassxc.KeePassXC.MainWindow /keepassxc org.keepassxc.MainWindow.openDatabase \
+string:$database string:$tmp_passwd

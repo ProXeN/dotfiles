@@ -25,33 +25,115 @@ include-file = ~/.config/bspwm/polybar/decor
 
 [bar/bar]
 enable-ipc=true
-monitor = ${env:MONITOR:}
+monitor = DP-0
 
 height = 35
-width = 98%
+width = 99%
 
-font-0 = Source Code Pro Medium:size=10;2
-font-1 = Iosevka Nerd Font:size=14;4
+font-0 = "Iosevka Nerd Font:size=10;2"
+font-1 = "Iosevka Nerd Font:size=14;4"
+font-2 = "Iosevka Nerd Font:size=18;4"
 
-offset-x = 1%
+;font-0 = Source Code Pro Medium:size=10;2
+;font-1 = Iosevka Nerd Font:size=14;4
+;font-2 = Iosevka Nerd Font:size=18;4
+
+offset-x = .5%
+offset-y = 1%
+
+radius = 5 
+border-size = 0
+
+border-color = ${color.FOREGROUND}
+background = ${color.BACKGROUND}
+foreground = ${color.FOREGROUND}
+
+tray-position=right
+tray-detached=true
+tray-offset-x = -260
+tray-foreground = ${color.FOREGROUND}
+line-size = 2
+
+padding=1
+
+modules-left =   launcher sep cpu memory filesystem ethernet
+modules-center = bspwm
+modules-right =  sep volume sep popup-calendar spacer
+
+scroll-up = bspwn-wsnext 
+scroll-down = bspwn-wsprev
+
+override-redirect = false
+wm-restack = bspwm
+
+
+[bar/left]
+enable-ipc=true
+monitor = DVI-I-0
+
+height = 35
+width = 99%
+
+font-0 = "Iosevka Nerd Font:size=10;2"
+font-1 = "Iosevka Nerd Font:size=14;4"
+font-2 = "Iosevka Nerd Font:size=18;4"
+
+;font-0 = Source Code Pro Medium:size=10;2
+;font-1 = Iosevka Nerd Font:size=14;4
+;font-2 = Iosevka Nerd Font:size=18;4
+
+offset-x = .5%
 offset-y = 1%
 
 radius = 5
 border-size = 0
 
-border-color = ${color.foreground}
-background = ${color.background}
-foreground = ${color.foreground}
-
-tray-position=right
-tray-detached=false
-line-size = 2
+border-color = ${color.FOREGROUND}
+background = ${color.BACKGROUND}
+foreground = ${color.FOREGROUND}
 
 padding=1
 
-modules-left =   launcher sep cpu memory filesystem 
-modules-center = bspwm sep mod
-modules-right =  volume sep time
+modules-left =   launcher sep cpu memory filesystem ethernet
+modules-center = bspwm
+modules-right =  volume sep popup-calendar spacer
+
+scroll-up = bspwn-wsnext 
+scroll-down = bspwn-wsprev
+
+override-redirect = false
+wm-restack = bspwm
+
+[bar/right]
+enable-ipc=true
+monitor = DVI-D-0
+
+height = 35
+width = 99%
+
+font-0 = "Iosevka Nerd Font:size=10;2"
+font-1 = "Iosevka Nerd Font:size=14;4"
+font-2 = "Iosevka Nerd Font:size=18;4"
+
+;font-0 = Source Code Pro Medium:size=10;2
+;font-1 = Iosevka Nerd Font:size=14;4
+;font-2 = Iosevka Nerd Font:size=18;4
+
+offset-x = .5%
+offset-y = 1%
+
+radius = 5
+border-size = 0
+
+border-color = ${color.FOREGROUND}
+background = ${color.BACKGROUND}
+foreground = ${color.FOREGROUND}
+
+padding=1
+
+modules-left =   launcher sep cpu memory filesystem ethernet
+modules-center = bspwm
+modules-right =  volume sep popup-calendar spacer
 
 scroll-up = bspwn-wsnext 
 scroll-down = bspwn-wsprev

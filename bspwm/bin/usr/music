@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+## Run ncmpcpp with alternate config
+
+kitty --class 'ncmpcpp' -o remember_window_size=no -o initial_window_width=920 -o initial_window_height=540 -e ~/.config/ncmpcpp/scripts/ncmpcpp-art

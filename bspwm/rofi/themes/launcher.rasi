@@ -1,0 +1,139 @@
+/**
+ * Nordic rofi theme
+ * Adapted by undiabler <undiabler@gmail.com>
+ *
+ * Nord Color palette imported from https://www.nordtheme.com/
+ *
+ */
+
+configuration {
+    show-icons: true;
+    icon-theme: "Zafiro-Icons-Dark-Blue-f";
+    combi-hide-mode-prefix: false;
+    drun-display-format: "{icon} {name}"; 
+    font: "JetBrainsMono Nerd Font Medium 10";
+    display-window: "";
+    display-windowcd: "";
+    display-run: "";
+    display-ssh: "";
+    display-drun: "";
+    display-combi: "";
+}
+
+@import "colors.rasi"
+
+* {
+    background-color: transparent;
+}
+
+window {
+    width: 700px;
+    location: center;
+    anchor:   center;
+    transparency: "real";
+    padding: 2px;
+    border:  0px;
+    border-radius: 6px;
+
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+}
+
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
+}
+
+message {
+    color: @nord0;
+    padding: 5;
+    border-color: @selected;
+    border:  0px 2px 2px 2px;
+    background-color: @background;
+}
+
+inputbar {
+    color: @nord6;
+    padding: 11px;
+    background-color: @backgroundalt;
+
+    border: 1px;
+    border-radius:  6px 6px 0px 0px;
+    border-color: @selected;
+}
+
+entry, prompt, case-indicator {
+    text-color: @foreground;
+}
+
+prompt {
+    margin: 0px 1em 2px 2px;
+    enabled: true;
+    font: "Iosevka Nerd Font 10";
+}
+
+listview {
+    lines: 10;
+    padding: 8px;
+    border-radius: 0px 0px 6px 6px;
+    border-color: @selected;
+    border: 0px 1px 1px 1px;
+    background-color: @backgroundt;
+    dynamic: false;
+}
+
+element {
+    padding: 3px;
+    vertical-align: 0.5;
+    border-radius: 4px;
+    background-color: transparent;
+    color: @foreground;
+    text-color: rgb(216, 222, 233);
+}
+
+element selected.normal {
+	background-color: @selected;
+	text-color: @background;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element-text {
+    vertical-align: 0.5;
+    margin: 2px 0px 2px 10px;
+}
+
+element-icon {
+    size: 30px;
+}
+
+button {
+    padding: 6px;
+    color: @foreground;
+    horizontal-align: 0.5;
+
+    border: 2px 0px 2px 2px;
+    border-radius: 4px 0px 0px 4px;
+    border-color: @foreground;
+}
+
+button selected normal {
+    border: 2px 0px 2px 2px;
+    border-color: @foreground;
+}
+
+sidebar {
+    border: 0px;
+    border-color: @nord1;
+    border-radius: 0px;
+}
+
+case-indicator {
+    spacing: 0;
+    text-color: @foreground;
+}
