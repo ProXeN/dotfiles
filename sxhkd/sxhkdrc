@@ -1,112 +1,54 @@
-#
-# wm independent hotkeys
-#
 
-# reloads sxhkd configuration:
+# make sxhkd reload its configuration files:
 super + Escape
-    pkill -USR1 -x sxhkd
+	pkill -USR1 -x sxhkd
 
-# Launch Terminal
-super + Return
-    terminal
-
-# Floating Alacritty Terminal
-super + shift + Return
-    terminal -f
-
-# Fullscreen Alacritty Terminal
-super + shift + t
-    terminal -m
-
-# j4 dmenu
-alt + F1
-    def-dmenu
-
-# Launch Menus
-super + {x,n,d,s}
-    {powermenu,def-nmdmenu,j4-dmenu,def-ssdmenu}
-
-# Lock Screen
-ctrl + alt + l
-    lock
-
-# custom dmenu scripts
-alt + {e,l}
-    {edit-configs, quick-links}
-
-# Launch Applications
-super + shift + {f,w,r,g,c,d,s,v}
-    {thunar,vivaldi-stable,terminal -e ranger,geany,code,discord,spotify,virtualbox}
-
-# Volume controls
-XF86Audio{RaiseVolume,LowerVolume,Mute}
-    volume{ --up, --down, --toggle}
-
-# Brightness controls
-XF86MonBrightness{Up,Down}
-    brightness{ --up, --down}
-
-# screenshot
-Print
-    takeshot --now
-
-# screenshot active window
-ctrl + Print
-    takeshot --win
-
-# screenshot selected area
-ctrl + shift + Print
-    takeshot --area
-
-#
-#
 # BSPWM HOTKEYS
-#
-#
 
 # quit/restart bspwm
 ctrl + shift + {q,r}
-    bspc {quit,wm -r}
+	bspc {quit,wm -r}
 
 # close and kill
-super + c
-    bspc node -c
+super + {_,shift + }q
+	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
-super + space
-	bspc node -t "~"{floating,tiled}
+super + m
+	bspc desktop -l next
 
 # send the newest marked node to the newest preselected node
 super + y
 	bspc node newest.marked.local -n newest.!automatic.local
 
-# swap the current node and the biggest window
+# swap the current node and the biggest node
 super + g
-	bspc node -s biggest.window
+	bspc node -s biggest.local
 
-#
-# state/flags
-#
+# STATE/FLAGS
 
 # set the window state
-super + {t,ctrl + t,f}
-	bspc node -t {tiled,pseudo_tiled,fullscreen}
+super + shift + space
+#super + {p,t}
+       bspc node -t "~"{pseudo_tiled,tiled}
+
+#super + {t,shift + t}
+#	bspc node -t {tiled,pseudo_tiled}
+
+# toggle fullscreen or window
+
+super + f
+	bspc node --state \~fullscreen
+
+# alternate between tiled and tiling
+super + space
+	bspc node -t "~"{floating,tiled}
 
 # set the node flags
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
-# Send the window to another edge of the screen
-super + {_,shift + }{Left,Down,Up,Right}
-    bspc node -{f,s} {west,south,north,east}
-
-# Change focus to next window, including floating window
-alt + {_,shift + }Tab
-    bspc node -f {next.local,prev.local}
- 
-#
-# focus/swap
-#
+# FOCUS/SWAP
 
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
@@ -116,24 +58,20 @@ super + {_,shift + }{h,j,k,l}
 super + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
 
-# focus the next/previous window in the current desktop
-super + {_,shift + }c
-	bspc node -f {next,prev}.local.!hidden.window
+# focus the next/previous node in the current desktop
+#super + {_,shift + }n
+#	bspc node -f {next,prev}.local
 
 # focus the next/previous desktop in the current monitor
-super + bracket{left,right}
+super + {greater,less}
 	bspc desktop -f {prev,next}.local
 
-alt + {_,shift + }{1-9,0}
-	bspc {desktop -f, window-d} $(bspc query -M -m)/{a,b,c}
-
-alt + w
-	bspc monitor -f next
-
-
 # focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
+alt + Tab
+	bspc node -f last
+
+alt + shift + Tab
+	bspc desktop -f last
 
 # focus the older or newer node in the focus history
 super + {o,i}
@@ -141,13 +79,7 @@ super + {o,i}
 	bspc node {older,newer} -f; \
 	bspc wm -h on
 
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
-
-#
-# preselect
-#
+# PRESELECT
 
 # preselect the direction
 super + ctrl + {h,j,k,l}
@@ -165,26 +97,61 @@ super + ctrl + space
 super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
-#
-# move/resize
-#
-
-# Expanding windows
-super + control {Left,Right,Up,Down}
-    bspc node -z {left -20 0,right 20 0,top 0 -20,bottom 0 20}
-
-# Shrinking windows
-super + alt + {Left,Right,Up,Down}
-    bspc node -z {left 20 0,right -20 0,top 0 20,bottom 0 -20}
+# MOVE/RESIZE
 
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
+super + alt + ctrl + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
-super + {Left,Down,Up,Right}
+ctrl + alt + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#focus or send to the given desktop
+super + {_,shift + }{grave,asciicircum,1-9,0,ssharp,minus,equal,acute}
+	bspc {desktop -f,node -d} ^{0,0,1-9,10,11,11,12,12}
+
+#swap desktops
+super + ctrl + {grave,asciicircum,1-9,0,ssharp,minus,equal,acute}
+	bspc desktop -s ^{0,0,1-9,10,11,11,12,12} --follow
+
+#send focused desktop to next/previous/{dir} monitor
+#super + ctrl + shift + {n,p,h,j,k,l}
+#	bspc desktop -m {next,prev,west,south,north,east} --follow
+
+# SPECIALKEYS
+XF86Audio{RaiseVolume,LowerVolume,Mute,Play}
+	{volume --up, volume --down, volume --toggle, mpc toggle}
+
+# APPLICATION KEYBINDINGS (Super + Alt + Key)
+super + Return
+	bspterm
+
+# Launch Menus 
+super + {x,n}
+	{arcolinux-logout,rofi-network}
+
+super + s
+	sh ~/.config/bspwm/rofi/bin/screenshot
+
+super + d
+	sh ~/.config/bspwm/rofi/bin/launcher
+
+# Lock Screen
+ctrl + alt + l
+	lock
+  
+# custom dmenu scripts
+alt + l
+	rofi-quicklinks
+  
+# Launch Applications
+super + shift + {f,w,r,g,c,d,s,v,n,m}
+	{thunar,vivaldi-stable,bspterm -e ranger,color-gpick,code,discocss,spotify,galculator, music, mailspring}
+  
+alt + F3
+	xfce4-appfinder
