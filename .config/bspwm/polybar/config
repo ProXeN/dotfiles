@@ -25,7 +25,7 @@ include-file = ~/.config/bspwm/polybar/decor
 
 [bar/bar]
 enable-ipc=true
-monitor = DP-0
+;monitor = DP-0
 
 height = 35
 width = 99%

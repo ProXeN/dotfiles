@@ -39,8 +39,8 @@ set_values() {
 ## Launch Polybar with selected style
 launch_bar() {
   polybar -q bar -c "$DIR"/config &
-  polybar -q left -c "$DIR"/config &
-  polybar -q right -c "$DIR"/config &
+  #polybar -q left -c "$DIR"/config &
+  #polybar -q right -c "$DIR"/config &
 }
 
 # Execute functions
